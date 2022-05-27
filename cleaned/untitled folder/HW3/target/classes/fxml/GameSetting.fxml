@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<Pane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/GameSetting.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.gameSetting.SettingController">
+   <children>
+      <JFXComboBox fx:id="gameType" layoutX="369.0" layoutY="163.0" onMouseClicked="#gameTypeAction" prefHeight="39.0" prefWidth="232.0" promptText="Game Level" styleClass="combo-box" />
+      <JFXComboBox fx:id="difficulty" disable="true" layoutX="369.0" layoutY="254.0" onMouseClicked="#gameTypeAction" prefHeight="39.0" prefWidth="232.0" promptText="Difficulty" styleClass="combo-box" />
+      <JFXToggleButton layoutX="407.0" layoutY="375.0" onMouseClicked="#changeColor" fx:id="blackAndWhite" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Old Fashion" />
+      <JFXButton disable="true" fx:id="startGame" onMouseClicked="#startGame" layoutX="359.0" layoutY="562.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="118.0" styleClass="jfxButton" style="-fx-background-color: #313837" text="Start" />
+      <ImageView fx:id="volume" onMouseClicked="#changeMusicState" fitHeight="35.0" fitWidth="39.0" layoutX="27.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true"/>
+   </children>
+</Pane>

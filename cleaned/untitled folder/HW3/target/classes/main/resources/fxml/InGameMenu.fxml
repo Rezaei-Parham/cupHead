@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="720.0" prefWidth="1280.0" styleClass="backPane" stylesheets="@../css/InGameMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.gameSetting.InGameMenuController">
+   <children>
+      <Label layoutX="589.0" layoutY="173.0" onMouseClicked="#restart" text="Restart" textFill="WHITE">
+         <font>
+            <Font name="Carajillo de Anís" size="20.0" />
+         </font></Label>
+      <Label layoutX="576.0" layoutY="216.0" onMouseClicked="#exitGame" text="Exit Game" textFill="WHITE">
+         <font>
+            <Font name="Carajillo de Anís" size="22.0" />
+         </font></Label>
+      <ImageView fx:id="volume" onMouseClicked="#changeMusicState" fitHeight="35.0" fitWidth="39.0" layoutX="27.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox fx:id="helpList" disable="true" layoutX="66.0" layoutY="129.0" opacity="0.63" prefHeight="87.0" prefWidth="201.0" spacing="5.0">
+         <children>
+            <Text fill="#03f598" strokeType="OUTSIDE" strokeWidth="0.0" text="Press arrow keys or wasd to move">
+               <font>
+                  <Font name="Chalkboard" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#3cf5b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Press space to shoot">
+               <font>
+                  <Font name="Candy Cane" size="14.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Press tab to change shooting style">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.1995249406175772">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.44316521286964417" green="0.9868420958518982" blue="0.696881115436554" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <font>
+                  <Font name="Chalkboard SE Light" size="14.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Press b to become super bomb">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.1995249406175772">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.5424585938453674" green="0.8552631735801697" blue="0.7353547215461731" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <font>
+                  <Font name="Chalkboard" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <ImageView fx:id="help" fitHeight="35.0" fitWidth="28.0" layoutX="33.0" layoutY="102.0" onMouseClicked="#helpAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/colored/inGameMenu/help.png" />
+         </image></ImageView>
+      <Label layoutX="594.0" layoutY="130.0" onMouseClicked="#resumeGame" text="Resume" textFill="WHITE">
+         <font>
+            <Font name="Carajillo de Anís" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

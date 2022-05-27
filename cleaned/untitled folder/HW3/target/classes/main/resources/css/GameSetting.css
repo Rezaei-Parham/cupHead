@@ -1,0 +1,10 @@
+Pane{
+    -fx-background-image: url("../pictures/setting-menu.JPG");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center;
+    -fx-background-size: 1280 720;
+}
+
+.jfxButton {
+    -fx-text-fill: #d5d4d4;
+}
