@@ -50,7 +50,7 @@ public class MiniBossController {
         if (miniBoss.getPictureFrame() > 4)
             miniBoss.setPictureFrame(1); // revert flapping images
 
-        if (miniBoss.getPictureFrame() == 1)
+        if (miniBoss.getColorNumber() == 1)
             miniBoss.setImage(ImagesAddress.MINI_BOSS_YELLOW.getImage(miniBoss.getPictureFrame()));
         else miniBoss.setImage(ImagesAddress.MINI_BOSS_PURPLE.getImage(miniBoss.getPictureFrame()));
         miniBoss.setPictureFrame(miniBoss.getPictureFrame() + 1);
