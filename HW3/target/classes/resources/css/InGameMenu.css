@@ -1,0 +1,13 @@
+.backPane{
+    -fx-background-image: url("../pictures/InGameMenu.jpeg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1280 720;
+}
+Text{
+    -fx-font-family: candy;
+}
+
+@font-face {
+    -fx-font-family: 'candy';
+    src : url("Candcu__.ttf");
+}

@@ -1,0 +1,25 @@
+AnchorPane{
+    -fx-background-image: url("../pictures/login_background.JPG");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center;
+    -fx-background-size: 1280 720;
+}
+
+TextField{
+    -fx-background-color: #d5d4d4;
+    -fx-max-width: 330;
+    -fx-pref-height: 35;
+    -fx-border-radius: 5;
+    -fx-prompt-text-fill: #454645;
+}
+
+.button{
+    -fx-text-fill: WHITE;
+    -fx-background-color: GRAY;
+    -fx-border-radius: 10;
+    -fx-background-radius: 20;
+    -fx-opacity: 0.5;
+}
+.button:hover{
+    -fx-opacity: 1;
+}

@@ -1,0 +1,6 @@
+HBox{
+    -fx-background-image: url("../pictures/profile-back.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center;
+    -fx-background-size: 1280 ;
+}

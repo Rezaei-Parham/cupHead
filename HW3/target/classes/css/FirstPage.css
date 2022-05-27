@@ -1,0 +1,53 @@
+.parent{
+    -fx-background-color: transparent;
+}
+.pane{
+    -fx-background-color: #0df895;
+    -fx-background-image: url("../pictures/firstpage.jpeg");
+    -fx-background-repeat: stretch;
+    -fx-background-size:980 400 ;
+}
+
+.trans-btn-white-border{
+    -fx-background-color:  transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: rgba(231, 231, 231, 0.8);
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: whitesmoke;
+}
+.white-pane{
+    -fx-background-color: #ffffff;
+}
+
+.blue-pane{
+-fx-background-color: #414141;
+}
+.tf_box{
+    -fx-background-color: transparent;
+    -fx-border-color: #DEDEE4;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+.tf{
+    -fx-background-color: transparent;
+}
+.blue-btn{
+    -fx-background-color: #ea6293;
+    -fx-background-radius:  5px;
+    -fx-text-fill: #ffffff;
+}
+
+TextField{
+    -fx-text-fill: WHITE;
+}
+.jfx-snackbar-content{
+    -fx-background-color: #f34d8a;
+    -fx-text-fill: WHITE;
+    -fx-font-family: "Andale Mono";
+    -fx-font-size: 14;
+}
+.jfx-snackbar-toast{
+    -fx-alignment: center;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20;
+}
