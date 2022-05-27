@@ -15,20 +15,20 @@ public class CupHeadExplosionFog extends ImageView {
 
     public CupHeadExplosionFog(boolean isFire) {
         CupHeadExplosionFogController controller = new CupHeadExplosionFogController(this);
-        isFired = isFire;
+        isFired = isFire; // if contains fire
         explosionAnimation = new Timeline(new KeyFrame(Duration.millis(100), controller::animatePhoto));
         lightning = new ImageView();
-        this.setX(GamePane.getGamePane().getCupHead().getX());
+        this.setX(GamePane.getGamePane().getCupHead().getX()); // setting position
         this.setY(GamePane.getGamePane().getCupHead().getY());
-        lightning.setX(GamePane.getGamePane().getCupHead().getX());
+        lightning.setX(GamePane.getGamePane().getCupHead().getX()); // lightning position
         lightning.setY(GamePane.getGamePane().getCupHead().getY());
         explosionAnimation.setCycleCount(10);
         GamePane.getGamePane().requestAdding(this);
         GamePane.getGamePane().requestAdding(lightning);
         explosionAnimation.play();
-        GamePane.getGamePane().addAnimation(explosionAnimation);
+        GamePane.getGamePane().addAnimation(explosionAnimation); // adding animation to saved ones
         GamePane.getGamePane().getCupHead().setOpacity(0);
-        GamePane.getGamePane().getCupHead().setImmune(true);
+        GamePane.getGamePane().getCupHead().setImmune(true); // cupHead is immune for a second
     }
 
 

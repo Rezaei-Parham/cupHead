@@ -18,26 +18,25 @@ public class LandScape extends ImageView {
 
     public LandScape(int i) {
         setX(0);
-        if (i == 1) setX(1280);
+        if (i == 1) setX(1280); // set which of two images
         setY(0);
         setFitWidth(1280);
         try {
-
-            URL address = new URL(Objects.requireNonNull(Main.class.getResource("/pictures/colored/background/2.png")).toString());
+            URL address = new URL(Objects.requireNonNull(
+                    Main.class.getResource("/pictures/colored/background/2.png")).toString());
             this.setImage(new Image(address.toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         animatedMove = new Timeline(new KeyFrame(Duration.millis(90), this::movePictures));
         animatedMove.setCycleCount(Animation.INDEFINITE);
     }
 
     private void movePictures(ActionEvent event) {
-        if (this.getX() <= -1280) {
-            this.setX(1280);
-        }
-        this.setX(this.getX() - 40);
+        if (this.getX() <= -1280)
+            this.setX(1280); // move background cyclic
+
+        this.setX(this.getX() - 40); // move background to left
     }
 
     public void startMoving() {

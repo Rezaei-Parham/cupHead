@@ -38,6 +38,7 @@ public class ProfileMenu {
 
     public void saveNewPassword() {
         String password = newPassword.getText();
+        // check new password safety
         if (FirstPageController.isPasswordNotSafe(password)) AlertBox.display(loginPageTexts.PASSWORD_SAFETY);
         else {
             AlertBox.display(loginPageTexts.PASSWORD_CHANGED);
@@ -47,6 +48,7 @@ public class ProfileMenu {
 
     public void saveNewUsername() {
         String username = newUsername.getText();
+        // check if user with same username exists
         if (FirstPageController.isUsernameNotUnique(username)) AlertBox.display(loginPageTexts.USER_EXISTS);
         else {
             AlertBox.display(loginPageTexts.USERNAME_CHANGED);
@@ -72,7 +74,8 @@ public class ProfileMenu {
         File file = fileChooser.showSaveDialog(new Stage());
         if (file != null) {
             String chosenAvatarPath = file.toURI().toString();
-            ImagePattern pattern = new ImagePattern(new Image(chosenAvatarPath), 280, 180, 100, 100, false);
+            ImagePattern pattern = new ImagePattern(new Image(chosenAvatarPath),
+                    280, 180, 100, 100, false);
             avatarCircle.setFill(pattern);
             Game.getLoggedInUser().setAvatarURL(chosenAvatarPath);
         }

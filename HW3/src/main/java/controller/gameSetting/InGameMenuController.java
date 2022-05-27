@@ -27,18 +27,18 @@ public class InGameMenuController {
 
     public void helpAction() {
         if(helpList.getOpacity() == 1)
-            helpList.setOpacity(0);
+            helpList.setOpacity(0); // change opacity of the help text
         else helpList.setOpacity(1);
     }
 
     public void changeMusicState() {
         if (Game.isMute()) {
-            Game.unMute();
-            volume.setImage(ImagesAddress.MENU_VOLUME_On.getImage());
+            Game.unMute(); // unmute the game
+            volume.setImage(ImagesAddress.MENU_VOLUME_On.getImage()); // change the icon of volume
             return;
         }
         Game.mute();
-        volume.setImage(ImagesAddress.MENU_VOLUME_OFF.getImage());
+        volume.setImage(ImagesAddress.MENU_VOLUME_OFF.getImage()); // change the icon of the volume
     }
 
     public void resumeGame() {
@@ -52,7 +52,9 @@ public class InGameMenuController {
 
     public void restart() {
         GamePane.getGamePane().stopAnimations();
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), new KeyValue(MusicsAddress.GAME_MUSIC.getPlayer().volumeProperty(), 0)));
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(2),
+                        new KeyValue(MusicsAddress.GAME_MUSIC.getPlayer().volumeProperty(), 0)));
         timeline.setOnFinished(event -> MusicsAddress.GAME_MUSIC.stopMusic());
         timeline.play();
         GamePane.getGamePane().nullifyObjects();

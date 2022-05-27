@@ -14,14 +14,14 @@ public class SuperBombExplosion extends ImageView {
     private int imageFrame;
 
     public SuperBombExplosion() {
-        setX(GamePane.getGamePane().getCupHead().getX() - 10);
+        setX(GamePane.getGamePane().getCupHead().getX() - 10); // setting the position
         setY(GamePane.getGamePane().getCupHead().getY() - 10);
         imageFrame = 1;
         explodeAnimation = new Timeline(new KeyFrame(Duration.millis(200), this::changeImage));
-        boomImage = new ImageView(ImagesAddress.BOOM.getImage());
-        boomImage.setX(GamePane.getGamePane().getCupHead().getX() - 10);
-        boomImage.setY(GamePane.getGamePane().getCupHead().getY() - 10);
-        explodeAnimation.setCycleCount(7);
+        boomImage = new ImageView(ImagesAddress.BOOM.getImage()); // Boom image
+        boomImage.setX(GamePane.getGamePane().getCupHead().getX() - 30);
+        boomImage.setY(GamePane.getGamePane().getCupHead().getY() - 30);
+        explodeAnimation.setCycleCount(7); // 7 rounds of animation
         GamePane.getGamePane().requestAdding(this);
         GamePane.getGamePane().requestAdding(boomImage);
         explodeAnimation.play();
@@ -29,16 +29,16 @@ public class SuperBombExplosion extends ImageView {
     }
 
     private void changeImage(ActionEvent event) {
-        if (imageFrame == 5) {
+        if (imageFrame == 5) // ending the boom
             GamePane.getGamePane().requestRemoving(boomImage);
-        }
+
         this.setImage(ImagesAddress.SUPER_BOMB_EXPLOSION.getImage(imageFrame));
-        if (imageFrame == 7) {
+        if (imageFrame == 7) { // ending the explosion animation
             explodeAnimation.stop();
             GamePane.getGamePane().removeAnimation(explodeAnimation);
             GamePane.getGamePane().requestRemoving(this);
             return;
         }
-        imageFrame++;
+        imageFrame++; // frame goes to next one
     }
 }

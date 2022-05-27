@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
@@ -68,15 +67,48 @@ public class FirstPageController {
         return !password.matches("[a-zA-Z0-9!@#$%^]{8,32}");
     }
 
+    public static void choosePictureOfList(JFXComboBox avatarList, Circle avatarCircle) {
+        String newAvatarPath;
+        if (avatarList == null || avatarList.getValue() == null) return;
+        if (avatarList.getValue().equals("Miles Prower"))
+            newAvatarPath = getProfilePictureAddress(1);
+        else if (avatarList.getValue().equals("CupHead"))
+            newAvatarPath = getProfilePictureAddress(2);
+        else if (avatarList.getValue().equals("Mugman"))
+            newAvatarPath = getProfilePictureAddress(3);
+            else return;
+        if (!newAvatarPath.equals("")) {
+            ImagePattern pattern = new ImagePattern(new Image(newAvatarPath),
+                    280, 180, 100, 100, false);
+            avatarCircle.setFill(pattern);
+            if (Game.getLoggedInUser() != null) Game.getLoggedInUser().setAvatarURL(newAvatarPath);
+        }
+    }
+
+    private static String getProfilePictureAddress(int i){
+        String newAvatarPath = "";
+        try {
+            newAvatarPath = String.valueOf(
+                    new URL(Objects.requireNonNull(
+                            Main.class.getResource(
+                                    "/pictures/defaultProfilePictures/" + i + ".jpeg")).toString()));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return  newAvatarPath;
+    }
+
     public void initialize() {
         MusicsAddress.MENUS.stopMusic();
         avatarList.setItems(FXCollections.observableArrayList("Miles Prower", "CupHead", "Mugman"));
         openSignUp();
-        fileChooser.setInitialDirectory(new File("/Users/cyberrose/personal/Sharif%/Term2/AP/HW3/src/main/resources/pictures/defaultProfilePictures"));
+        fileChooser.setInitialDirectory(new File(
+                "/Users/cyberrose/personal/Sharif%/Term2/" +
+                        "AP/HW3/src/main/resources/pictures/defaultProfilePictures"));
         if (avatarCircle != null) randomInitializeAvatar();
     }
 
-    public void openSignUp() {
+    public void openSignUp() { // change the vbox to sign up page
         TranslateTransition transition = new TranslateTransition(Duration.millis(1000), vBox);
         transition.setToX(0);
         transition.play();
@@ -91,7 +123,7 @@ public class FirstPageController {
         }));
     }
 
-    public void openSignIn() {
+    public void openSignIn() { // change th vbox to sign in
         TranslateTransition transition = new TranslateTransition(Duration.millis(1000), vBox);
         transition.setToX(vBox.getLayoutX() * 20);
         transition.play();
@@ -107,14 +139,12 @@ public class FirstPageController {
     }
 
     public void register() throws MalformedURLException {
-        if (isUsernameNotUnique(username.getText())) {
+        if (isUsernameNotUnique(username.getText())) // check if username is unique
             AlertBox.display(loginPageTexts.USER_EXISTS);
-        }
-        if (isPasswordNotSafe(password.getText())) {
+        if (isPasswordNotSafe(password.getText())) // chec k if password is safe
             AlertBox.display(loginPageTexts.PASSWORD_SAFETY);
-
-        } else {
-            AlertBox.display(loginPageTexts.WELCOME);
+        else {
+            AlertBox.display(loginPageTexts.WELCOME); // show the welcome popo up
             User user = new User(username.getText(), password.getText());
             user.setAvatarURL(chosenAvatarPath);
             Database.addUser(user);
@@ -124,9 +154,9 @@ public class FirstPageController {
 
     public void signInAttempt() {
         String usernameText = username.getText();
-        if (!isUsernameValid(usernameText)) {
+        if (!isUsernameValid(usernameText))
             AlertBox.display(loginPageTexts.USER_NOT_EXISTS);
-        } else {
+        else {
             User user = Database.getUserByUsername(usernameText);
             assert user != null;
             if (!isPasswordCorrect(user, password.getText())) {
@@ -146,17 +176,19 @@ public class FirstPageController {
         File file = fileChooser.showSaveDialog(new Stage());
         if (file != null) {
             chosenAvatarPath = file.toURI().toString();
-            ImagePattern pattern = new ImagePattern(new Image(chosenAvatarPath), 280, 180, 100, 100, false);
+            ImagePattern pattern = new ImagePattern(
+                    new Image(chosenAvatarPath), 280, 180, 100, 100, false);
             avatarCircle.setFill(pattern);
         }
     }
 
     private void randomInitializeAvatar() {
-        Random random = new Random();
-        int index = Math.abs(random.nextInt()) % 3 + 1;
+        Random random = new Random(); // random number
+        int index = Math.abs(random.nextInt()) % 3 + 1; // based in 1 - 3
         URL address = null;
         try {
-            address = new URL(Objects.requireNonNull(Main.class.getResource("/pictures/defaultProfilePictures/" + index + ".jpeg")).toString());
+            address = new URL(Objects.requireNonNull(
+                    Main.class.getResource("/pictures/defaultProfilePictures/" + index + ".jpeg")).toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -167,40 +199,10 @@ public class FirstPageController {
     }
 
     public void signAsGuest() {
-        Main.changeMenu("MainMenu");
+        Main.changeMenu("MainMenu"); // go to game without sign in
     }
 
-    public void actAvatarList(MouseEvent mouseEvent) {
+    public void actAvatarList() {
         choosePictureOfList(avatarList, avatarCircle);
-    }
-
-    public static void choosePictureOfList(JFXComboBox avatarList, Circle avatarCircle) {
-        String newAvatarPath = "";
-        if(avatarList == null || avatarList.getValue() == null) return;
-        if (avatarList.getValue().equals("Miles Prower")) {
-            try {
-                newAvatarPath = String.valueOf(new URL(Objects.requireNonNull(Main.class.getResource("/pictures/defaultProfilePictures/1.jpeg")).toString()));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        } else if (avatarList.getValue().equals("CupHead")) {
-            try {
-                newAvatarPath = String.valueOf(new URL(Objects.requireNonNull(Main.class.getResource("/pictures/defaultProfilePictures/2.jpeg")).toString()));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        } else if (avatarList.getValue().equals("Mugman")) {
-            try {
-                newAvatarPath = String.valueOf(new URL(Objects.requireNonNull(Main.class.getResource("/pictures/defaultProfilePictures/3.jpeg")).toString()));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        } else return;
-        if(!newAvatarPath.equals("")) {
-            ImagePattern pattern = new ImagePattern(new Image(newAvatarPath), 280, 180, 100, 100, false);
-            avatarCircle.setFill(pattern);
-            if(Game.getLoggedInUser() != null)
-                Game.getLoggedInUser().setAvatarURL(newAvatarPath);
-        }
     }
 }

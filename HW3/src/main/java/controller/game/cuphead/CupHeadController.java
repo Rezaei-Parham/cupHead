@@ -37,33 +37,30 @@ public class CupHeadController {
             cupHead.setY(cupHead.getY() - 15);
     }
 
-    public void initializeAnimations() {
-
-    }
-
     public void hit(boolean isOnFire) {
         if(cupHead == null) return;
-        if (cupHead.isSuperBomb()) {
+        if (cupHead.isSuperBomb()) { // if is super bomb
             new SuperBombExplosion();
             new CupHeadExplosionFog(false);
             cupHead.setImage(ImagesAddress.CUP_HEAD.getImage());
-            cupHead.setSuperBomb(false);
-            cupHead.setX(40);
+            cupHead.setSuperBomb(false); // de super bomb
+            cupHead.setX(40); // set the position
             cupHead.setY(500);
             return;
         }
-        if (cupHead.isImmune()) return;
+        if (cupHead.isImmune()) return; // check if it's immune
+        // decrease the health level
         cupHead.setHealth(cupHead.getHealth() - Game.getDifficultyLevel().getGettingDamagedRate());
-        new CupHeadExplosionFog(isOnFire);
+        new CupHeadExplosionFog(isOnFire); // start new explosion
         if (cupHead.getHealth() <= 0) GamePane.getGamePane().endGame();
     }
 
     public void becomeSuperBomb() {
         if(cupHead == null) return;
-        cupHead.becomeSuperBomb();
+        cupHead.becomeSuperBomb(); // set super bomb field and immunity as true
         transformToSuperBomb = new Timeline(new KeyFrame(Duration.millis(50), this::changePhotoToSuperBomb));
         transformToSuperBomb.setCycleCount(12);
-        transformToSuperBomb.play();
+        transformToSuperBomb.play(); // becoming the super bomb image animation
         GamePane.getGamePane().addAnimation(transformToSuperBomb);
     }
 
@@ -71,14 +68,14 @@ public class CupHeadController {
         if(cupHead == null) return;
         cupHead.setImage(ImagesAddress.SUPER_BOMB.getImage(cupHead.getPictureFrame()));
         if (cupHead.getPictureFrame() == 12) {
-            transformToSuperBomb.stop();
+            transformToSuperBomb.stop(); // stop the transformation
             GamePane.getGamePane().removeAnimation(transformToSuperBomb);
             return;
         }
         cupHead.setPictureFrame(cupHead.getPictureFrame() + 1);
     }
 
-    public void increaseSuperEnergy(int i) {
+    public void increaseSuperEnergy(int i) { // increasing the energy needed to become super bomb
         if(cupHead == null) return;
         if (cupHead.getSuperBombCounter() == 15) return;
         cupHead.setSuperBombCounter(cupHead.getSuperBombCounter() + i);

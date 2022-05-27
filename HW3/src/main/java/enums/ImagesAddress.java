@@ -37,7 +37,8 @@ public enum ImagesAddress {
     BOOM("cupHead/superBombExplosion/20", ".png"),
     SUPER_BOMB_EXPLOSION("cupHead/superBombExplosion/", ".png"),
     BULLET_EXPLOSION("bulletexplosion/",".png"),
-    BULLET_FIRE("bulletFire/",".png");
+    BULLET_FIRE("bulletFire/",".png"),
+    PROFILE_PICTURE("defaultProfilePictures/",".png");
 
     private final String partA;
     private final String partB;

@@ -16,8 +16,8 @@ public class Game {
     private static GamePreData difficultyLevel = GamePreData.LEVEL2;
     private static boolean isMute;
     private static int time = 0;
-    private static Timeline timer;
-    private static String picturesDirectory = "colored";
+    private static Timeline timer; // in game timer
+    private static String picturesDirectory = "colored"; // color of the game
 
     public static User getLoggedInUser() {
         return loggedInUser;
@@ -70,13 +70,13 @@ public class Game {
     }
 
     public static void startMusic(){
-        if(!Game.isMute()) MusicsAddress.GAME_MUSIC.playMusic();
+        if(!Game.isMute()) MusicsAddress.GAME_MUSIC.playMusic(); // starting the music
     }
     public static void preSetTimer() {
         time = 0;
         timer = new Timeline(new KeyFrame(Duration.seconds(1), Game::setTime));
         timer.setCycleCount(Animation.INDEFINITE);
-        timer.play();
+        timer.play(); // starting the timer
     }
 
     public static int getTime() {

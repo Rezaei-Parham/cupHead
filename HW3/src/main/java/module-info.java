@@ -16,7 +16,7 @@ module com.example.hw3test {
     opens controller.game;
     opens model.game;
     opens controller.mainmenu;
-    opens controller.Utils;
+    opens controller.utils;
     requires com.fasterxml.jackson.databind;
     opens javafx.fxml to com.fasterxml.jackson.databind;
 }

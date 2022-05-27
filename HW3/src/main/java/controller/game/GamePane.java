@@ -30,17 +30,10 @@ public class GamePane {
     private Vector<Timeline> activeAnimations = new Vector<>();
 
     public static GamePane getGamePane() {
-        if (staticGamePane == null) {
-            staticGamePane = new GamePane();
-            initializer();
-        }
-
+        if (staticGamePane == null) staticGamePane = new GamePane();
         return staticGamePane;
     }
 
-    public static void initializer() {
-
-    }
 
     public static GamePane getStaticGamePane() {
         return staticGamePane;
@@ -103,7 +96,7 @@ public class GamePane {
         int hours = totalTime / 3600;
         int minutes = (totalTime % 3600) / 60;
         int seconds = totalTime % 60;
-
+        // get the time in human clock format
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 
@@ -138,9 +131,11 @@ public class GamePane {
 
     public void endGame() {
         stopAnimations();
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), new KeyValue(MusicsAddress.GAME_MUSIC.getPlayer().volumeProperty(), 0)));
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(2),
+                        new KeyValue(MusicsAddress.GAME_MUSIC.getPlayer().volumeProperty(), 0)));
         timeline.setOnFinished(event -> MusicsAddress.GAME_MUSIC.stopMusic());
-        timeline.play();
+        timeline.play(); // relaxing the music
         Main.changeMenu("GameEndPage");
     }
 

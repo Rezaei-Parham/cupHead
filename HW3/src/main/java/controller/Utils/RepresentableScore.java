@@ -1,4 +1,4 @@
-package controller.Utils;
+package controller.utils;
 
 public class RepresentableScore {
     private final String username;
@@ -11,7 +11,8 @@ public class RepresentableScore {
     private final int devilScore;
     private final int devilTime;
 
-    public RepresentableScore(String username, int score1, int time1, int score2, int time2, int score3, int time3, int scoreDevil, int timeDevil) {
+    public RepresentableScore(String username, int score1, int time1,
+                              int score2, int time2, int score3, int time3, int scoreDevil, int timeDevil) {
         this.username = username;
         this.level1Score = score1;
         this.level1Time = time1;

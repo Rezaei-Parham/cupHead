@@ -16,14 +16,15 @@ public class BabyBoss extends Entity implements Enemy {
     public BabyBoss() {
         this.setHealth(50);
         setImage(ImagesAddress.BABY_BOSS.getImage(1));
-        setX(800 - this.getImage().getWidth() / 2);
+        setX(800 - this.getImage().getWidth() / 2); // set position
         setY(360 - this.getImage().getHeight() / 2);
-        rotatingEggs.put(0, new ImageView(ImagesAddress.EGG_PHASE2.getImage()));
+        rotatingEggs.put(0, new ImageView(ImagesAddress.EGG_PHASE2.getImage())); // set images
         rotatingEggs.put(1, new ImageView(ImagesAddress.EGG_PHASE2.getImage()));
         rotatingEggs.put(2, new ImageView(ImagesAddress.EGG_PHASE2.getImage()));
         rotatingEggs.put(3, new ImageView(ImagesAddress.EGG_PHASE2.getImage()));
-        GamePane.getGamePane().requestAdding(this);
-        GamePane.getGamePane().requestAdding(rotatingEggs.get(0), rotatingEggs.get(1), rotatingEggs.get(2), rotatingEggs.get(3));
+        GamePane.getGamePane().requestAdding(this); // add to page
+        GamePane.getGamePane().requestAdding
+                (rotatingEggs.get(0), rotatingEggs.get(1), rotatingEggs.get(2), rotatingEggs.get(3));
         GamePane.getGamePane().addEnemy(this);
     }
 
@@ -31,13 +32,13 @@ public class BabyBoss extends Entity implements Enemy {
     @Override
     public void setHealth(double health) {
         super.setHealth(health);
-        GameScreenController.updateHealthBar();
-        if (health <= 0) GamePane.getGamePane().endGame();
+        GameScreenController.updateHealthBar(); // updating the health bar
+        if (health <= 0) GamePane.getGamePane().endGame(); // ending the game
     }
 
 
-    public void getHit(Shootable shootable) {
-        if (!isImmune) this.setHealth(this.getHealth() - Game.getDifficultyLevel().getHitDamageRate());
+    public void getHit(Shootable shootable) { // getting damaged by hitting
+        if (!isImmune()) this.setHealth(this.getHealth() - Game.getDifficultyLevel().getHitDamageRate());
     }
 
     public HashMap<Integer, ImageView> getRotatingEggs() {

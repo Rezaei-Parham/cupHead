@@ -3,10 +3,10 @@ package model.game;
 import javafx.scene.image.ImageView;
 
 public class Entity extends ImageView {
-    double health;
-    boolean isImmune;
-    int speed;
-    Direction direction;
+    private double health;
+    private boolean isImmune;
+    private int speed;
+    private Direction direction;
 
     public double getHealth() {
         return health;

@@ -18,10 +18,10 @@ public class CupHead extends Entity {
 
     public CupHead() {
         setHealth(Game.getDifficultyLevel().getNumberOfLives());
-        GamePane.getGamePane().requestAdding(this);
+        GamePane.getGamePane().requestAdding(this); // add to pane
         this.shootingState = ShooterEnum.BULLET;
         direction = new Vector<>();
-        this.setX(40);
+        this.setX(40); // set the starting position
         this.setY(40);
         this.setImage(ImagesAddress.CUP_HEAD.getImage());
         GamePane.getGamePane().setCupHead(this);
@@ -36,13 +36,13 @@ public class CupHead extends Entity {
     }
 
     public void changeShootingStyle() {
-        if (this.shootingState.equals(CupHead.ShooterEnum.BULLET)) {
+        if (this.shootingState.equals(CupHead.ShooterEnum.BULLET))
             this.shootingState = ShooterEnum.BOMB;
-        } else this.shootingState = ShooterEnum.BULLET;
+        else this.shootingState = ShooterEnum.BULLET;
     }
 
     public void superBombRequest() {
-        if (this.superBombCounter >= 15) {
+        if (this.superBombCounter >= 15) { // become superBomb ability
             superBombCounter = 0;
             GamePane.getGamePane().getCupHeadController().becomeSuperBomb();
         }
@@ -50,7 +50,7 @@ public class CupHead extends Entity {
 
     public void becomeSuperBomb() {
         isSuperBomb = true;
-        isImmune = true;
+        setImmune(true);
     }
 
     public boolean isSuperBomb() {
@@ -71,8 +71,8 @@ public class CupHead extends Entity {
 
     @Override
     public void setHealth(double health) {
-        this.health = health;
-        GameScreenController.updateCupHeadLives();
+        this.setHealth(health);
+        GameScreenController.updateCupHeadLives(); // cup head lives update
     }
 
     public int getPictureFrame() {

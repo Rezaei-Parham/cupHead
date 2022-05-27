@@ -28,7 +28,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
         try {
-            Database.saveToJson();
+            Database.saveToJson(); // save data to file
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -41,7 +41,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
         try {
-            Database.saveToJson();
+            Database.saveToJson(); // save data to file
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class User {
     public void setAvatarURL(String avatarURL) {
         this.avatarURL = avatarURL;
         try {
-            Database.saveToJson();
+            Database.saveToJson(); // save data to file
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,7 @@ public class User {
                 break;
         }
         try {
-            Database.saveToJson();
+            Database.saveToJson(); // save data to file
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

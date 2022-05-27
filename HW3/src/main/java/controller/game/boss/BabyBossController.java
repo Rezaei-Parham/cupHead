@@ -1,6 +1,6 @@
 package controller.game.boss;
 
-import controller.UtilMethods;
+import controller.utils.UtilMethods;
 import controller.game.GamePane;
 import enums.ImagesAddress;
 import enums.MusicsAddress;
@@ -38,6 +38,7 @@ public class BabyBossController {
 
     private void changeImage(ActionEvent event) {
         if(boss == null) return;
+        // finishing the image by laser bullet
         if (boss.getPresentImageIndex() >= 36) boss.setPresentImageIndex(1);
         if (boss.getPresentImageIndex() == 27) MusicsAddress.BABY_LASER.playSong();
         if (boss.getPresentImageIndex() == 28) new LaserBullet();
@@ -47,12 +48,14 @@ public class BabyBossController {
 
     private void randomMove(ActionEvent event) {
         if(boss == null) return;
-        if (boss.getAngle() == 360) boss.setAngle(0);
+        if (boss.getAngle() == 360) boss.setAngle(0); // resetting the angle
         boss.setX(800 + 300 * Math.cos(Math.toRadians(boss.getAngle())) - boss.getImage().getWidth() / 2);
         boss.setY(360 - 100 * Math.sin(Math.toRadians(boss.getAngle())) - boss.getImage().getHeight() / 2);
         for (Integer i : boss.getRotatingEggs().keySet()) {
-            boss.getRotatingEggs().get(i).setX(boss.getX() + boss.getImage().getWidth() / 2 + 300 * Math.cos(Math.toRadians(boss.getAngle() + i * 90)));
-            boss.getRotatingEggs().get(i).setY(boss.getY() + boss.getImage().getHeight() / 2 - 300 * Math.sin(Math.toRadians(boss.getAngle() + i * 90)));
+            boss.getRotatingEggs().get(i).setX(boss.getX() +
+                    boss.getImage().getWidth() / 2 + 300 * Math.cos(Math.toRadians(boss.getAngle() + i * 90)));
+            boss.getRotatingEggs().get(i).setY(boss.getY() +
+                    boss.getImage().getHeight() / 2 - 300 * Math.sin(Math.toRadians(boss.getAngle() + i * 90)));
         }
         doHittingAction();
         boss.setAngle(boss.getAngle() + 10);
@@ -61,19 +64,19 @@ public class BabyBossController {
     private void doHittingAction() {
         if(boss == null) return;
         for (Iterator<Integer> iterator = boss.getRotatingEggs().keySet().iterator(); iterator.hasNext(); ) {
-            int index = iterator.next();
-            ImageView egg = boss.getRotatingEggs().get(index);
+            int index = iterator.next(); // check if next one exists
+            ImageView egg = boss.getRotatingEggs().get(index); // egg which will be splashing
             if (UtilMethods.intersect(egg, GamePane.getGamePane().getCupHead())) {
                 GamePane.getGamePane().getCupHeadController().hit(false);
                 boss.getRotatingEggs().remove(index);
                 GamePane.getGamePane().requestRemoving(egg);
-                new EggSplash(egg);
+                new EggSplash(egg); // start new egg splash animation
                 return;
             }
         }
         if (UtilMethods.intersect(boss, GamePane.getGamePane().getCupHead())) {
             GamePane.getGamePane().getCupHeadController().hit(false);
-            if (GamePane.getGamePane().getCupHead().isSuperBomb())
+            if (GamePane.getGamePane().getCupHead().isSuperBomb()) // hit by the ratio of damage
                 boss.setHealth(boss.getHealth() - 4 * Game.getDifficultyLevel().getHitDamageRate());
         }
     }

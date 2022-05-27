@@ -18,7 +18,8 @@ public class OpeningPage {
     public void initialize() {
         URL address = null;
         try {
-            address = new URL(Objects.requireNonNull(Main.class.getResource("/pictures/colored/movies/startingMovie.mp4")).toString());
+            address = new URL(Objects.requireNonNull(
+                    Main.class.getResource("/pictures/colored/movies/startingMovie.mp4")).toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -26,7 +27,7 @@ public class OpeningPage {
         MediaPlayer mediaPlayer = new MediaPlayer(new Media(address.toString()));
         player = mediaPlayer;
         mediaPlayer.setAutoPlay(true);
-        mediaPlayer.setVolume(1);
+        mediaPlayer.setVolume(1); // set the volume to max
         movieView.setMediaPlayer(mediaPlayer);
         mediaPlayer.setOnEndOfMedia(() -> Main.changeMenu("FirstPage"));
     }

@@ -15,19 +15,19 @@ public class EggSplash extends ImageView {
 
     public EggSplash(ImageView egg) {
         Timeline splashAnimation = new Timeline(new KeyFrame(Duration.millis(50), this::animateSplash));
-        splashAnimation.setCycleCount(9);
+        splashAnimation.setCycleCount(9); // animation rounds
         animation = splashAnimation;
-        this.setX(egg.getX());
+        this.setX(egg.getX()); // setting the position
         this.setY(egg.getY());
         this.setImage(ImagesAddress.SPLASHED_EGG.getImage(1));
         GamePane.getGamePane().requestAdding(this);
         splashAnimation.play();
         GamePane.getGamePane().addAnimation(splashAnimation);
-        MusicsAddress.EGG_SPLASH.playSong();
+        MusicsAddress.EGG_SPLASH.playSong(); // egg splashing song
     }
 
     private void animateSplash(ActionEvent event) {
-        if (pictureFrame >= 9) {
+        if (pictureFrame >= 9) { // ending the animation
             GamePane.getGamePane().requestRemoving(this);
             animation.stop();
             GamePane.getGamePane().removeAnimation(animation);

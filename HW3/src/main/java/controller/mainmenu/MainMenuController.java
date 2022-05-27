@@ -3,8 +3,8 @@ package controller.mainmenu;
 import enums.MusicsAddress;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
-import model.mainmenu.MenuBox;
-import model.mainmenu.MenuItem;
+import view.componentController.mainmenu.MenuBox;
+import view.componentController.mainmenu.MenuItem;
 
 
 public class MainMenuController {
@@ -16,7 +16,9 @@ public class MainMenuController {
     }
 
     public void createMenu() {
-        MenuBox menuList = new MenuBox(new MenuItem("START GAME"), new MenuItem("SCORE BOARD"), new MenuItem("PROFILE"), new MenuItem("LOGOUT"));
+        MenuBox menuList = new MenuBox(new MenuItem("START GAME"),
+                new MenuItem("SCORE BOARD"),
+                new MenuItem("PROFILE"), new MenuItem("LOGOUT"));
         menuList.setTranslateX(100);
         menuList.setTranslateY(100);
         MusicsAddress.MENUS.resumeMusic();

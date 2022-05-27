@@ -1,6 +1,6 @@
 package model.game;
 
-import controller.UtilMethods;
+import controller.utils.UtilMethods;
 import controller.game.BulletExplosion;
 import controller.game.GamePane;
 import enums.ImagesAddress;
@@ -17,11 +17,13 @@ public class Bomb extends ImageView implements Shootable {
     Timeline movementAnimation;
 
     public Bomb() {
-        this.setX(GamePane.getGamePane().getCupHead().getX() + GamePane.getGamePane().getCupHead().getImage().getWidth() / 2);
-        this.setY(GamePane.getGamePane().getCupHead().getY() + GamePane.getGamePane().getCupHead().getImage().getHeight());
+        this.setX(GamePane.getGamePane().getCupHead().getX() // setting the position
+                + GamePane.getGamePane().getCupHead().getImage().getWidth() / 2);
+        this.setY(GamePane.getGamePane().getCupHead().getY()
+                + GamePane.getGamePane().getCupHead().getImage().getHeight());
         movementAnimation = new Timeline(new KeyFrame(Duration.millis(50), this::actMoving));
         this.setImage(ImagesAddress.CUP_HEAD_BOMB.getImage());
-        movementAnimation.setCycleCount(Animation.INDEFINITE);
+        movementAnimation.setCycleCount(Animation.INDEFINITE); // start moving animation
         GamePane.getGamePane().requestAdding(this);
         movementAnimation.play();
         GamePane.getGamePane().addAnimation(movementAnimation);
@@ -34,7 +36,6 @@ public class Bomb extends ImageView implements Shootable {
             GamePane.getGamePane().removeAnimation(movementAnimation);
             return;
         }
-
         for (Iterator<Enemy> iterator = GamePane.getGamePane().getEnemies().iterator(); iterator.hasNext(); ) {
             Enemy enemy = iterator.next();
             if (UtilMethods.intersect(this, (ImageView) enemy)) {
@@ -52,6 +53,6 @@ public class Bomb extends ImageView implements Shootable {
         movementAnimation.stop();
         GamePane.getGamePane().removeAnimation(movementAnimation);
         GamePane.getGamePane().requestRemoving(this);
-        new BulletExplosion(this);
+        new BulletExplosion(this); // explosion of bullet
     }
 }

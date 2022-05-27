@@ -45,12 +45,14 @@ public class GameScreenController {
     public static void updateHealthBar() {
         bossHealthBarStatic.setWidth(1.5 * GamePane.getGamePane().getBoss().getHealth());
         bossHealthStatic.setText(String.valueOf(GamePane.getGamePane().getBoss().getHealth()));
-        if (GamePane.getGamePane().getBoss().getHealth() < 30) bossHealthBarStatic.setFill(Color.valueOf("E55A55"));
+        if (GamePane.getGamePane().getBoss().getHealth() < 30)  // change dangerous color
+            bossHealthBarStatic.setFill(Color.valueOf("E55A55"));
     }
 
     public static void updateSuperBombProgressBar() {
         if (GamePane.getGamePane().getCupHead() != null)
-            superBombProgressBarStatic.setWidth(GamePane.getGamePane().getCupHead().getSuperBombCounter() * (float) (150) / 15);
+            superBombProgressBarStatic.setWidth // width according to the amount
+                    (GamePane.getGamePane().getCupHead().getSuperBombCounter() * (float) (150) / 15);
     }
 
     public static void updateTimer() {
@@ -58,90 +60,86 @@ public class GameScreenController {
     }
 
     public static void updateShowingScore() {
-        if (GamePane.getGamePane().getCupHead() != null)
+        if (GamePane.getGamePane().getCupHead() != null) // score if cup head exists
             showingScoreStatic.setText(String.valueOf(GameEndingPage.getScore()));
     }
 
     public static void updateCupHeadLives() {
         if (GamePane.getGamePane().getCupHead() != null) {
             cupHeadLivesStatic.setText(String.valueOf(GamePane.getGamePane().getCupHead().getHealth()));
-            if (GamePane.getGamePane().getCupHead().getHealth() < 3)
+            if (GamePane.getGamePane().getCupHead().getHealth() < 3) // dangerous situation color
                 cupHeadLivesStatic.setStyle("-fx-text-fill: #f14e4e");
         }
     }
 
-    //    private CupHeadMoveAnimation cupHeadMove;
-//
+
     public void initialize() {
         if (Game.getPicturesDirectory().equals("bw")) pane.getStyleClass().add("BlackPane");
-        if (!GamePane.getGamePane().isIsMiddleOfGame()) {
-            GamePane.getGamePane().preSet(pane);
-            LandScape landScape = new LandScape(0);
-            LandScape landScape1 = new LandScape(1);
-            bossHealthBarStatic = bossHealthBar;
-            bossHealthStatic = bossHealth;
-            superBombProgressBarStatic = superBombProgressBar;
-            cupHeadLivesStatic = cupHeadLives;
-            showingScoreStatic = showingScore;
-            pane.getChildren().add(landScape);
-            pane.getChildren().add(landScape1);
-            new CupHead();
-            landScape.startMoving();
-            landScape1.startMoving();
-            GamePane.getGamePane().setBoss(new Boss());
-            initializeMiniBosses();
-            MusicsAddress.GAME_MUSIC.playMusic();
-        } else {
+        if (!GamePane.getGamePane().isIsMiddleOfGame())
+            partiallyInitializeStartOfTheGame();
+        else {
             pane.getChildren().addAll(GamePane.getGamePane().getInstance().getChildren());
             GamePane.getGamePane().setPane(pane);
         }
         shootingStateButton.setViewOrder(-1);
         GamePane.getGamePane().setIsMiddleOfGame(true);
-        createCupHeadMove();
+        createCupHeadMove(); // cup head movement animate
         staticTimer = timer;
-        Game.startTimer();
-        updateCupHeadLives();
-        updateHealthBar();
+        Game.startTimer(); // game timer start
+        updateCupHeadLives(); // lives of cup head initialize
+        updateHealthBar(); // boss health bar
+    }
+
+    private void partiallyInitializeStartOfTheGame(){
+        GamePane.getGamePane().preSet(pane);
+        LandScape landScape = new LandScape(0);
+        LandScape landScape1 = new LandScape(1);
+        // setting the static ones for static usage
+        bossHealthBarStatic = bossHealthBar;
+        bossHealthStatic = bossHealth;
+        superBombProgressBarStatic = superBombProgressBar;
+        cupHeadLivesStatic = cupHeadLives;
+        showingScoreStatic = showingScore;
+        pane.getChildren().add(landScape);
+        pane.getChildren().add(landScape1);
+        new CupHead(); // creating a cup head
+        landScape.startMoving(); // start moving the landscapes
+        landScape1.startMoving();
+        GamePane.getGamePane().setBoss(new Boss());
+        initializeMiniBosses(); // initialize mini boss creation
+        MusicsAddress.GAME_MUSIC.playMusic();
     }
 
     private void createCupHeadMove() {
         CupHead cupHead = GamePane.getGamePane().getCupHead();
         cupHead.setFocusTraversable(true);
-        cupHead.requestFocus();
+        cupHead.requestFocus(); // request focus one the cup head
         cupHead.setOnKeyPressed(event -> keyProcessor(event.getCode().getName(), true));
         cupHead.setOnKeyReleased(event -> keyProcessor(event.getCode().getName(), false));
     }
 
     private void keyProcessor(String key, boolean add) {
         switch (key) {
-            case "Left":
-            case "A":
+            case "Left": case "A":
                 if (add) GamePane.getGamePane().getCupHead().setDirection(Entity.Direction.left);
                 else GamePane.getGamePane().getCupHead().removeDirection(Entity.Direction.left);
                 break;
-            case "Right":
-            case "D":
+            case "Right": case "D":
                 if (add) GamePane.getGamePane().getCupHead().setDirection(Entity.Direction.right);
-                else GamePane.getGamePane().getCupHead().removeDirection(Entity.Direction.right);
-                break;
-            case "Up":
-            case "W":
+                else GamePane.getGamePane().getCupHead().removeDirection(Entity.Direction.right);break;
+            case "Up": case "W":
                 if (add) GamePane.getGamePane().getCupHead().setDirection(Entity.Direction.up);
-                else GamePane.getGamePane().getCupHead().removeDirection(Entity.Direction.up);
-                break;
-            case "Down":
-            case "S":
+                else GamePane.getGamePane().getCupHead().removeDirection(Entity.Direction.up);break;
+            case "Down": case "S":
                 if (add) GamePane.getGamePane().getCupHead().setDirection(Entity.Direction.down);
                 else GamePane.getGamePane().getCupHead().removeDirection(Entity.Direction.down);
                 break;
             case "Space":
-                if (add) createBullet();
-                break;
+                if (add) createBullet();break;
             case "Tab":
                 if (add) {
                     GamePane.getGamePane().getCupHead().changeShootingStyle();
-                    setShootingIcon();
-                }
+                    setShootingIcon();}
                 break;
             case "B":
                 if (add) GamePane.getGamePane().getCupHead().superBombRequest();
@@ -154,18 +152,18 @@ public class GameScreenController {
         if (GamePane.getGamePane().getCupHead().getShootingState().equals(CupHead.ShooterEnum.BULLET)) {
             ExplodeAnimation explodeAnimation = new ExplodeAnimation();
             GamePane.getGamePane().requestAdding(explodeAnimation.getExplosionImage());
-            explodeAnimation.play();
+            explodeAnimation.play(); // start animation of sending bullet
             Bullet bullet = new Bullet();
-            bullet.startMoving();
-        } else {
-            new Bomb();
+            bullet.startMoving(); // start moving the bullet
         }
+        else new Bomb(); // make a bomb
+
     }
 
     public void initializeMiniBosses() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(15000), this::createMiniBuss));
         timeline.setCycleCount(-1);
-        timeline.play();
+        timeline.play(); // start timeline of creating mini bosses for 15 seconds each
         GamePane.getGamePane().addAnimation(timeline);
     }
 

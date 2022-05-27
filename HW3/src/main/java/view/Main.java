@@ -30,10 +30,8 @@ public class Main extends Application {
     private static Stage stage;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/OpeningPage.fxml")));
-        Parent root = anchorPane;
+        Parent root = FXMLLoader.<AnchorPane>load(Objects.requireNonNull(getClass().getResource("/fxml/OpeningPage.fxml")));
         stage = primaryStage;
-        // primaryStage.initStyle(StageStyle.TRANSPARENT);
         Main.root = root;
         Scene scene = new Scene(root);
         Main.scene = scene;
@@ -41,7 +39,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-
     }
 
     public static void main(String[] args){
@@ -55,16 +52,16 @@ public class Main extends Application {
         if(!Objects.equals(name, "FirstPage")) {
             Stage newStage = new Stage();
             newStage.setScene(scene);
-            newStage.setResizable(false);
+            newStage.setResizable(false); // fixing the size
             stage.close();
             stage = newStage;
             stage.show();
-        }else {
+        }else{
             Stage newStage = new Stage();
             newStage.setScene(scene);
             newStage.setResizable(false);
-            newStage.initStyle(StageStyle.TRANSPARENT);
-            scene.setFill(Color.TRANSPARENT);
+            newStage.initStyle(StageStyle.TRANSPARENT); // special background of first page
+            scene.setFill(Color.TRANSPARENT); // filling color
             stage.close();
             stage = newStage;
             stage.show();
@@ -73,7 +70,8 @@ public class Main extends Application {
     }
     private static Parent loadFXML(String name){
         try {
-            URL address = new URL(Main.class.getResource("/fxml/" + name + ".fxml").toString());
+            URL address = new URL(Objects.requireNonNull(
+                    Main.class.getResource("/fxml/" + name + ".fxml")).toString());
             return FXMLLoader.load(address);
         } catch (IOException e) {
             e.printStackTrace();

@@ -14,7 +14,7 @@ public class BackgroundTransition extends Transition {
     int frame = 3;
 
     public BackgroundTransition(LandScape landScape) {
-        setCycleDuration(Duration.millis(200));
+        setCycleDuration(Duration.millis(200)); // background movement duration
         this.landScape = landScape;
         setCycleCount(-1);
 
@@ -22,20 +22,16 @@ public class BackgroundTransition extends Transition {
 
     @Override
     protected void interpolate(double frac) {
-        if (landScape.getX() <= -1280) {
-            landScape.setX(1280);
-        }
-// 
+        if (landScape.getX() <= -1280) landScape.setX(1280); // move background cyclic
+
         landScape.setX(landScape.getX() - 20);
         try {
-
-            URL address = new URL(Objects.requireNonNull(Main.class.getResource("/pictures/colored/background/" + frame + ".png")).toString());
+            URL address = new URL(Objects.requireNonNull(
+                    Main.class.getResource("/pictures/colored/background/" + frame + ".png")).toString());
             landScape.setImage(new Image(address.toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 }

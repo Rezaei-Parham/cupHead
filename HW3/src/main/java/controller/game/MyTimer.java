@@ -10,25 +10,25 @@ import java.net.URL;
 import java.util.Objects;
 
 public class MyTimer extends AnimationTimer {
-    private final LandScape l;
+    private final LandScape landScape;
 
-    public MyTimer(LandScape l) {
-        this.l = l;
+    public MyTimer(LandScape scape) {
+        this.landScape = scape;
     }
 
     @Override
     public void handle(long now) {
-        l.setX(l.getX() - 20);
-        if (l.getX() <= -1280) {
-            l.setX(1280);
-        }
+        landScape.setX(landScape.getX() - 20);
+        if (landScape.getX() <= -1280) // landscape out of the page
+            landScape.setX(1280);
         int frame = 2;
         URL address = null;
         try {
-            address = new URL(Objects.requireNonNull(Main.class.getResource("/pictures/colored/background/" + frame + ".png")).toString());
+            address = new URL(Objects.requireNonNull(
+                    Main.class.getResource("/pictures/colored/background/" + frame + ".png")).toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        l.setImage(new Image(Objects.requireNonNull(address).toString()));
+        landScape.setImage(new Image(Objects.requireNonNull(address).toString()));
     }
 }
